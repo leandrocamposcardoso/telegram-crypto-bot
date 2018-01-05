@@ -113,13 +113,14 @@ module.exports = class TelegramBot {
                         let responseData = response.result.fulfillment.data;
                         let responseAction = response.result.action;
 
-                        if (TelegramBot.isDefined(responseAction) && TelegramBot.isDefined(responseText)){
+                        if (TelegramBot.isDefined(responseAction) && TelegramBot.isDefined(responseData)){
+                            let telegramMessage = responseData.telegram;
+                            telegramMessage.chat_id = chatId;
+
                             console.log('Action: '+responseAction);
                             switch(responseAction){
                                 //Action /moeda
                                 case 'ValorMoedaAction':
-                                let telegramMessage = responseData.telegram;
-                                telegramMessage.chat_id = chatId;
                                 let moeda = response.result.parameters.moeda;
                                 this.getCriptoCourrence(moeda, function(resp){
                                     var msg = "Valor: R$"+resp.price_brl
