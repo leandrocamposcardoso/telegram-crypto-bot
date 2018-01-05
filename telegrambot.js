@@ -134,7 +134,7 @@ module.exports = class TelegramBot {
                             }
                         }
 
-                        if (TelegramBot.isDefined(responseData) && TelegramBot.isDefined(responseData.telegram)) {
+                        else if (TelegramBot.isDefined(responseData) && TelegramBot.isDefined(responseData.telegram)) {
 
                             console.log('Response as formatted message');
 
