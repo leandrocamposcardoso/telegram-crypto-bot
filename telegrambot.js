@@ -113,7 +113,7 @@ module.exports = class TelegramBot {
                         let responseData = response.result.fulfillment.data;
                         let responseAction = response.result.action;
 
-                        if (TelegramBot.isDefined(responseAction)){
+                        if (TelegramBot.isDefined(responseAction) && TelegramBot.isDefined(responseData)){
                             console.log('Action: '+responseAction);
                             switch(responseAction){
                                 //Action /moeda
