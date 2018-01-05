@@ -114,6 +114,7 @@ module.exports = class TelegramBot {
                         let responseAction = response.result.action;
 
                         if (TelegramBot.isDefined(responseAction)){
+                            console.log('Action: '+responseAction);
                             switch(responseAction){
                                 //Action /moeda
                                 case 'ValorMoedaAction':
