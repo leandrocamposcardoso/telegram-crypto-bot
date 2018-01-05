@@ -120,7 +120,8 @@ module.exports = class TelegramBot {
                                 case 'ValorMoedaAction':
                                 let moeda = response.result.parameters.moeda;
                                 this.getCriptoCourrence(moeda, function(resp){
-                                    console.log("Response: "+resp.id)
+                                    resp = resp.replace(/]|[[]/g, '')
+                                    console.log("Response: "+resp)
                                     this.reply(resp.price_brl);
                                 })
                                 break;
