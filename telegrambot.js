@@ -132,6 +132,7 @@ module.exports = class TelegramBot {
                                 default:
                                     break;
                             }
+                            TelegramBot.createResponse(res, 200, 'Message send');
                         }
 
                         else if (TelegramBot.isDefined(responseData) && TelegramBot.isDefined(responseData.telegram)) {
