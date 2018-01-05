@@ -132,12 +132,12 @@ module.exports = class TelegramBot {
                                 case 'ValorMoedaAction':
                                     let moeda = response.result.parameters.moeda;
                                     console.log(moeda)
-                                    this.getCriptoCourrence(moeda, function (resp) {
+                                    this.getCriptoCourrence(moeda,this, function (resp) {
                                         resp = JSON.parse(resp.replace(/]|[[]/g, ''))
                                         var cripto_brl = "Valor: R$" + resp.price_brl.substring(0, resp.price_brl.length - 2);
                                         console.log(cripto_brl)
                                         
-                                        this.reply({
+                                        self.reply({
                                             chat_id: chatId,
                                             text: cripto_brl
                                         });
@@ -198,7 +198,7 @@ module.exports = class TelegramBot {
         });
     }
     //Value getCripto
-    getCriptoCourrence(val, callback) {
+    getCriptoCourrence(val,self, callback) {
         request.get('https://api.coinmarketcap.com/v1/ticker/' + val + '/?convert=BRL', function (error, response, body) {
             if (!error && response.statusCode == 200) {
                 var result = JSON.stringify(JSON.parse(body));
