@@ -46,7 +46,7 @@ module.exports = class TelegramBot {
         this._telegramApiUrl = 'https://api.telegram.org/bot' + botConfig.telegramToken;
     }
 
-    start(responseCallback, errCallback){
+    start(responseCallback, errCallback) {
         // https://core.telegram.org/bots/api#setwebhook
         request.post(this._telegramApiUrl + '/setWebhook', {
             json: {
@@ -56,7 +56,7 @@ module.exports = class TelegramBot {
 
             if (error) {
                 console.error('Error while /setWebhook', error);
-                if (errCallback){
+                if (errCallback) {
                     errCallback(error);
                 }
                 return;
@@ -102,10 +102,9 @@ module.exports = class TelegramBot {
                     this._sessionIds.set(chatId, uuid.v1());
                 }
 
-                let apiaiRequest = this._apiaiService.textRequest(messageText,
-                    {
-                        sessionId: this._sessionIds.get(chatId)
-                    });
+                let apiaiRequest = this._apiaiService.textRequest(messageText, {
+                    sessionId: this._sessionIds.get(chatId)
+                });
 
                 apiaiRequest.on('response', (response) => {
                     if (TelegramBot.isDefined(response.result)) {
@@ -113,33 +112,37 @@ module.exports = class TelegramBot {
                         let responseData = response.result.fulfillment.data;
                         let responseAction = response.result.action;
 
-                        if (TelegramBot.isDefined(responseAction) && TelegramBot.isDefined(responseText)){
+                        if (TelegramBot.isDefined(responseText)) {
                             let telegramMessage = responseData.telegram;
                             telegramMessage.chat_id = chatId;
 
-                            console.log('Action: '+responseAction);
-                            switch(responseAction){
+                            console.log('Action: ' + responseAction);
+                            switch (responseAction) {
                                 //Action /moeda
                                 case 'ValorMoedaAction':
-                                let moeda = response.result.parameters.moeda;
-                                this.getCriptoCourrence(moeda, function(resp){
-                                    var msg = "Valor: R$"+resp.price_brl
-                                    console.log(msg)
-                                    resp = JSON.parse(resp.replace(/]|[[]/g, ''))
+                                    let moeda = response.result.parameters.moeda;
+                                    this.getCriptoCourrence(moeda, function (resp) {
+                                        var msg = "Valor: R$" + resp.price_brl
+                                        console.log(msg)
+                                        resp = JSON.parse(resp.replace(/]|[[]/g, ''))
+                                        this.reply({
+                                            chat_id: chatId,
+                                            text: msg
+                                        });
+                                    })
+                                    break;
+                                    //Default Action
+                                default:
+                                    console.log('Response as text message');
                                     this.reply({
                                         chat_id: chatId,
-                                        text: msg
+                                        text: responseText
                                     });
-                                })
-                                break;
-                                //Default Action
-                                default:
+                                    TelegramBot.createResponse(res, 200, 'Message processed');
                                     break;
                             }
                             TelegramBot.createResponse(res, 200, 'Message send');
-                        }
-
-                        else if (TelegramBot.isDefined(responseData) && TelegramBot.isDefined(responseData.telegram)) {
+                        } else if (TelegramBot.isDefined(responseData) && TelegramBot.isDefined(responseData.telegram)) {
 
                             console.log('Response as formatted message');
 
@@ -147,14 +150,6 @@ module.exports = class TelegramBot {
                             telegramMessage.chat_id = chatId;
 
                             this.reply(telegramMessage);
-                            TelegramBot.createResponse(res, 200, 'Message processed');
-
-                        } else if (TelegramBot.isDefined(responseText)) {
-                            console.log('Response as text message');
-                            this.reply({
-                                chat_id: chatId,
-                                text: responseText
-                            });
                             TelegramBot.createResponse(res, 200, 'Message processed');
 
                         } else {
@@ -172,8 +167,7 @@ module.exports = class TelegramBot {
                     TelegramBot.createResponse(res, 200, 'Error while call to api.ai');
                 });
                 apiaiRequest.end();
-            }
-            else {
+            } else {
                 console.log('Empty message');
                 return TelegramBot.createResponse(res, 200, 'Empty message');
             }
@@ -203,12 +197,12 @@ module.exports = class TelegramBot {
     }
 
     //Value getCripto
-    getCriptoCourrence(val,callback){
-        request.get('https://api.coinmarketcap.com/v1/ticker/'+val+'/?convert=BRL', function (error, response, body) {
+    getCriptoCourrence(val, callback) {
+        request.get('https://api.coinmarketcap.com/v1/ticker/' + val + '/?convert=BRL', function (error, response, body) {
             if (!error && response.statusCode == 200) {
-                var result = JSON.stringify(JSON.parse(body));          
+                var result = JSON.stringify(JSON.parse(body));
                 return callback(result, false);
-            } else {            
+            } else {
                 return callback(null, error);
             }
             console.log('getCripto called!');
