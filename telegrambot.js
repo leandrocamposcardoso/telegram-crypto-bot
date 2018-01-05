@@ -122,10 +122,12 @@ module.exports = class TelegramBot {
                                 telegramMessage.chat_id = chatId;
                                 let moeda = response.result.parameters.moeda;
                                 this.getCriptoCourrence(moeda, function(resp){
+                                    var msg = "Valor: R$"+resp.price_brl
+                                    console.log(msg)
                                     resp = JSON.parse(resp.replace(/]|[[]/g, ''))
                                     this.reply({
                                         chat_id: chatId,
-                                        text: "Valor: R$"+resp.price_brl
+                                        text: msg
                                     });
                                 })
                                 break;
