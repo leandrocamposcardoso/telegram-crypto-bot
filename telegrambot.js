@@ -1,19 +1,3 @@
-/**
- * Copyright 2017 Google Inc. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
- 
 'use strict';
 
 const apiai = require('apiai');
@@ -127,6 +111,28 @@ module.exports = class TelegramBot {
                     if (TelegramBot.isDefined(response.result)) {
                         let responseText = response.result.fulfillment.speech;
                         let responseData = response.result.fulfillment.data;
+                        let responseAction = response.result.action;
+
+                        if (TelegramBot.isDefined(responseAction)){
+                            switch(responseAction){
+                                //Action /moeda
+                                case 'ValorMoedaAction':
+                                let moeda = response.result.parameters.moeda;
+                                    //Procura a moeda
+                                    switch(moeda){
+                                        case 'bitcoin':
+                                        getCriptoCourrence(moeda, function(resp){
+                                            this.reply(telegramMessage);
+                                        })
+
+                                        break;
+                                    }
+                                break;
+                                //Default Action
+                                default:
+                                    break;
+                            }
+                        }
 
                         if (TelegramBot.isDefined(responseData) && TelegramBot.isDefined(responseData.telegram)) {
 
@@ -188,6 +194,19 @@ module.exports = class TelegramBot {
             }
 
             console.log('Method /sendMessage succeeded');
+        });
+    }
+
+    //Value getCripto
+    getCriptoCourrence(val,callback){
+        request.get('https://api.coinmarketcap.com/v1/ticker/'+val+'/?convert=BRL', function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                result = JSON.stringify(JSON.parse(body));          
+                return callback(result, false);
+            } else {            
+                return callback(null, error);
+            }
+            console.log('getCripto called!');
         });
     }
 
