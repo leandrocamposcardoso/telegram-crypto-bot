@@ -2,7 +2,7 @@
   "name": "heroku-node-telegram-bot",
   "version": "1.0.0",
   "description": "Starter pack for running telegram bot on the Heroku using Node.js",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "export $(cat .env | xargs) && node index.js",
