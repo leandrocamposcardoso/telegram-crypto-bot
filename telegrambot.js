@@ -131,17 +131,19 @@ module.exports = class TelegramBot {
                                 //Action /moeda
                                 case 'ValorMoedaAction':
                                     let moeda = response.result.parameters.moeda;
-                                    console.log(moeda)
-                                    this.getCriptoCourrence(moeda, function (resp) {
+                                    console.log(moeda);
+                                    let resp = getCriptoCourrence(moeda).then(function (resp) {
                                         resp = JSON.parse(resp.replace(/]|[[]/g, ''))
                                         var cripto_brl = "Valor: R$" + resp.price_brl.substring(0, resp.price_brl.length - 2);
                                         console.log(cripto_brl)
-                                        
-                                        TelegramBot.sreply({
+                                        this.reply({
                                             chat_id: chatId,
                                             text: cripto_brl
                                         });
+
                                     })
+
+
                                     break;
                                     //Default Action
                                 default:
@@ -197,35 +199,18 @@ module.exports = class TelegramBot {
             console.log('Method /sendMessage succeeded');
         });
     }
-
-    static sreply(msg) {
-        // https://core.telegram.org/bots/api#sendmessage
-        request.post('https://api.telegram.org/bot' + this._botConfig.telegramToken + '/sendMessage', {
-            json: msg
-        }, function (error, response, body) {
-            if (error) {
-                console.error('Error while /sendMessage', error);
-                return;
-            }
-
-            if (response.statusCode != 200) {
-                console.error('Error status code while /sendMessage', body);
-                return;
-            }
-
-            console.log('Method /sendMessage succeeded');
-        });
-    }
-
     //Value getCripto
-    getCriptoCourrence(val, callback) {
-        request.get('https://api.coinmarketcap.com/v1/ticker/' + val + '/?convert=BRL', function (error, response, body) {
-            if (!error && response.statusCode == 200) {
-                var result = JSON.stringify(JSON.parse(body));
-                return callback(result, false);
-            } else {
-                return callback(null, error);
-            }
+
+    getCriptoCourrence(val) {
+        return new Promise(function (resolve, reject) {
+            request.get('https://api.coinmarketcap.com/v1/ticker/' + val + '/?convert=BRL', function (error, response, body) {
+                if (!error && response.statusCode == 200) {
+                    var result = JSON.stringify(JSON.parse(body));
+                    return resolve(result);
+                } else {
+                    return reject(error);
+                }
+            });
         });
     }
 
