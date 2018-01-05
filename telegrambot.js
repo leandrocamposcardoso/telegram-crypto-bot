@@ -136,7 +136,7 @@ module.exports = class TelegramBot {
                                         resp = JSON.parse(resp.replace(/]|[[]/g, ''))
                                         var cripto_brl = "Valor: R$" + resp.price_brl.substring(0, resp.price_brl.length - 2);
                                         console.log(cripto_brl)
-
+                                        const DEV_CONFIG = process.env.DEVELOPMENT_CONFIG == 'true';
                                         const APP_NAME = "api-telegram-btc";
                                         const APIAI_ACCESS_TOKEN = "b797b87e61fa4846b407af418965a57d";
                                         const APIAI_LANG = "pt-br";
