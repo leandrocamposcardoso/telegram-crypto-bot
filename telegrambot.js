@@ -200,7 +200,7 @@ module.exports = class TelegramBot {
 
     static sreply(msg) {
         // https://core.telegram.org/bots/api#sendmessage
-        request.post(this._telegramApiUrl + '/sendMessage', {
+        request.post('https://api.telegram.org/bot' + this._botConfig.telegramToken + '/sendMessage', {
             json: msg
         }, function (error, response, body) {
             if (error) {
@@ -226,7 +226,6 @@ module.exports = class TelegramBot {
             } else {
                 return callback(null, error);
             }
-            console.log('getCripto called!');
         });
     }
 
