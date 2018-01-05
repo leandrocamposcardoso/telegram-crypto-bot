@@ -197,7 +197,7 @@ module.exports = class TelegramBot {
     getCriptoCourrence(val,callback){
         request.get('https://api.coinmarketcap.com/v1/ticker/'+val+'/?convert=BRL', function (error, response, body) {
             if (!error && response.statusCode == 200) {
-                result = JSON.stringify(JSON.parse(body));          
+                var result = JSON.stringify(JSON.parse(body));          
                 return callback(result, false);
             } else {            
                 return callback(null, error);
