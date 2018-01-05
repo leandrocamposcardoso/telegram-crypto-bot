@@ -12,7 +12,7 @@ const DEV_CONFIG = process.env.DEVELOPMENT_CONFIG == 'true';
 
 const APP_NAME = "api-telegram-btc";
 const APIAI_ACCESS_TOKEN = "b797b87e61fa4846b407af418965a57d";
-const APIAI_LANG = "en";
+const APIAI_LANG = "pt-br";
 const TELEGRAM_TOKEN = "406121750:AAHzZVy3dHL-SW6JOk9ANkB0GtKmX1XoyOI";
 
 var baseUrl = "";

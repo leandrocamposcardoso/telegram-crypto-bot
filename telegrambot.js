@@ -138,6 +138,9 @@ module.exports = class TelegramBot {
                                         console.log(cripto_brl)
 
                                         const APP_NAME = "api-telegram-btc";
+                                        const APIAI_ACCESS_TOKEN = "b797b87e61fa4846b407af418965a57d";
+                                        const APIAI_LANG = "pt-br";
+                                        const TELEGRAM_TOKEN = "406121750:AAHzZVy3dHL-SW6JOk9ANkB0GtKmX1XoyOI";
                                         const baseUrl = `https://${APP_NAME}.herokuapp.com`;
                                         const botConfig = new TelegramBotConfig(
                                             APIAI_ACCESS_TOKEN,
