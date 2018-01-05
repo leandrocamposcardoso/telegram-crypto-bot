@@ -136,7 +136,8 @@ module.exports = class TelegramBot {
                                         resp = JSON.parse(resp.replace(/]|[[]/g, ''))
                                         var cripto_brl = "Valor: R$" + resp.price_brl.substring(0, resp.price_brl.length - 2);
                                         console.log(cripto_brl)
-                                        this.reply({
+                                        
+                                        TelegramBot.sreply({
                                             chat_id: chatId,
                                             text: cripto_brl
                                         });
@@ -179,6 +180,25 @@ module.exports = class TelegramBot {
     }
 
     reply(msg) {
+        // https://core.telegram.org/bots/api#sendmessage
+        request.post(this._telegramApiUrl + '/sendMessage', {
+            json: msg
+        }, function (error, response, body) {
+            if (error) {
+                console.error('Error while /sendMessage', error);
+                return;
+            }
+
+            if (response.statusCode != 200) {
+                console.error('Error status code while /sendMessage', body);
+                return;
+            }
+
+            console.log('Method /sendMessage succeeded');
+        });
+    }
+
+    static sreply(msg) {
         // https://core.telegram.org/bots/api#sendmessage
         request.post(this._telegramApiUrl + '/sendMessage', {
             json: msg
