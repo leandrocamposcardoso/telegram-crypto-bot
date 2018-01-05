@@ -124,7 +124,7 @@ module.exports = class TelegramBot {
                                     console.log("Response: "+resp.id)
                                     this.reply({
                                         chat_id: chatId,
-                                        text: resp.price_brl
+                                        text: "oi"
                                     });
                                 })
                                 break;
