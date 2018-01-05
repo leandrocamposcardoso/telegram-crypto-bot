@@ -113,7 +113,7 @@ module.exports = class TelegramBot {
                         let responseData = response.result.fulfillment.data;
                         let responseAction = response.result.action;
 
-                        if (TelegramBot.isDefined(responseAction) && TelegramBot.isDefined(responseData)){
+                        if (TelegramBot.isDefined(responseAction) && TelegramBot.isDefined(responseText)){
                             let telegramMessage = responseData.telegram;
                             telegramMessage.chat_id = chatId;
 
