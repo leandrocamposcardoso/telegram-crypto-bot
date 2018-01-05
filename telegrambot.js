@@ -112,10 +112,20 @@ module.exports = class TelegramBot {
                         let responseData = response.result.fulfillment.data;
                         let responseAction = response.result.action;
 
-                        if (TelegramBot.isDefined(responseText)) {
+
+
+                        if (TelegramBot.isDefined(responseData) && TelegramBot.isDefined(responseData.telegram)) {
+
+                            console.log('Response as formatted message');
+
                             let telegramMessage = responseData.telegram;
                             telegramMessage.chat_id = chatId;
 
+                            this.reply(telegramMessage);
+                            TelegramBot.createResponse(res, 200, 'Message processed');
+
+                        } else if (TelegramBot.isDefined(responseText)) {
+                            console.log('Response as text message');
                             console.log('Action: ' + responseAction);
                             switch (responseAction) {
                                 //Action /moeda
@@ -133,23 +143,13 @@ module.exports = class TelegramBot {
                                     break;
                                     //Default Action
                                 default:
-                                    console.log('Response as text message');
                                     this.reply({
                                         chat_id: chatId,
                                         text: responseText
                                     });
-                                    TelegramBot.createResponse(res, 200, 'Message processed');
                                     break;
                             }
-                            TelegramBot.createResponse(res, 200, 'Message send');
-                        } else if (TelegramBot.isDefined(responseData) && TelegramBot.isDefined(responseData.telegram)) {
 
-                            console.log('Response as formatted message');
-
-                            let telegramMessage = responseData.telegram;
-                            telegramMessage.chat_id = chatId;
-
-                            this.reply(telegramMessage);
                             TelegramBot.createResponse(res, 200, 'Message processed');
 
                         } else {
