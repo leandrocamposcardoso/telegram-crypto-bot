@@ -174,6 +174,7 @@ module.exports = class TelegramBot {
 
                                         const bot = new TelegramBot(botConfig, baseUrl);
                                         var keys = Object.keys(resp.slice(0, 3));
+                                        resp = JSON.parse(resp)
                                         msg = ""
                                         for (var i = 0, length = keys.length; i < length; i++) {
                                             msg += i
