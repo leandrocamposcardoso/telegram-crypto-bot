@@ -282,10 +282,10 @@ module.exports = class TelegramBot {
                     });
                 }
                 obj_dic = obj_dic.sort(function (a, b) {
-                    return (b.variacao > a.variacao) ? 1 : ((b.variacao < a.variacao) ? -1 : 0);
+                    return ((b.variacao > a.variacao) ? 1 : ((b.variacao < a.variacao) ? -1 : 0)).slice(0, 3);
                 });
 
-                var result = JSON.stringify(obj_dic.slice(0, 3));
+                var result = JSON.stringify(obj_dic);
                 return callback(result, false);
 
             } else {
