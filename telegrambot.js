@@ -145,9 +145,9 @@ module.exports = class TelegramBot {
                                             APIAI_ACCESS_TOKEN,
                                             APIAI_LANG,
                                             TELEGRAM_TOKEN);
-                                        
+
                                         botConfig.devConfig = DEV_CONFIG;
-                                        
+
                                         const bot = new TelegramBot(botConfig, baseUrl);
 
                                         bot.reply({
@@ -157,42 +157,26 @@ module.exports = class TelegramBot {
                                     })
                                     break;
 
-                                    case 'VariacaoMoedaAction':
-                                    request.get('https://www.cryptopia.co.nz/api/GetMarkets/BTC', function (error, response, body) {
-                    
-                                    if (!error && response.statusCode == 200) {
-                                            var response = JSON.parse(body);
-                                            let data = response.Data
-                                            var obj_dic = {}
-                                            for (i in data.Label) {
-                                                obj_dic.append({
-                                                    'nome':data.Label,
-                                                    'pedido':data.AskPrice,
-                                                    'ofertado':data.BidPrice,
-                                                    'volume':data.Volume,
-                                                    'variacao':(((
-                                                            parseFloat(
-                                                                (data.AskPrice - 0.00000001).toFixed(8)
-                                                            ) - parseFloat((data.BidPrice + 0.00000001).toFixed(8)))
-                                                    /parseFloat((data.BidPrice + 0.00000001).toFixed(8))) * 100
-                                                )
-                                                })
-                                            }
-                                            console.log(obj_dic)
-                                           
-                                            this.reply({
-                                                chat_id: chatId,
-                                                text: 'a'
-                                            });
-                                            console.log(resp);
-                                        } else {
-                                            this.reply({
-                                                chat_id: chatId,
-                                                text: 'b'
-                                            });
-                                            console.log(error);
-                                        }
-                                    });
+                                case 'VariacaoMoedaAction':
+                                    this.getVariacao(function(resp){
+                                        const DEV_CONFIG = process.env.DEVELOPMENT_CONFIG == 'true';
+                                        const APP_NAME = "api-telegram-btc";
+                                        const APIAI_ACCESS_TOKEN = "b797b87e61fa4846b407af418965a57d";
+                                        const APIAI_LANG = "pt-br";
+                                        const TELEGRAM_TOKEN = "406121750:AAHzZVy3dHL-SW6JOk9ANkB0GtKmX1XoyOI";
+                                        const baseUrl = `https://${APP_NAME}.herokuapp.com`;
+                                        const botConfig = new TelegramBotConfig(
+                                            APIAI_ACCESS_TOKEN,
+                                            APIAI_LANG,
+                                            TELEGRAM_TOKEN);
+    
+                                        botConfig.devConfig = DEV_CONFIG;
+    
+                                        const bot = new TelegramBot(botConfig, baseUrl);
+                                        console.log(resp)
+                                    })
+                                  
+
                                     break;
                                     //Default Action
                                 default:
@@ -259,6 +243,34 @@ module.exports = class TelegramBot {
             }
         });
     }
+
+    getVariacao(val, callback) {
+        request.get('https://www.cryptopia.co.nz/api/GetMarkets/BTC', function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                var response = JSON.stringify(JSON.parse(body));
+                let data = response.Data
+                var obj_dic = {}
+                for (i in data.Label) {
+                    obj_dic.append({
+                        'nome': data.Label,
+                        'pedido': data.AskPrice,
+                        'ofertado': data.BidPrice,
+                        'volume': data.Volume,
+                        'variacao': (((
+                                parseFloat(
+                                    (data.AskPrice - 0.00000001).toFixed(8)
+                                ) - parseFloat((data.BidPrice + 0.00000001).toFixed(8))) /
+                            parseFloat((data.BidPrice + 0.00000001).toFixed(8))) * 100)
+                    })
+                }
+                return callback(obj_dic, false);
+
+            } else {
+                return callback(null, error);
+            }
+        })
+    }
+
 
     static createResponse(resp, code, message) {
         return resp.status(code).json({
