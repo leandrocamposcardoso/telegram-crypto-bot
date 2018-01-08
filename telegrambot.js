@@ -179,19 +179,7 @@ module.exports = class TelegramBot {
                                                 })
                                             }
                                             console.log(obj_dic)
-                                            var byVariacao = obj_dic;
-                                            byVariacao.sort(function(a,b) {
-                                                return b.variacao - a.variacao;
-                                            });
-                                            var resp = "Maior variacao:\n"
-                                            for (i=0;i<=5;i++){
-                                                resp += byVariacao.nome+"\n"
-                                                resp += byVariacao.pedido+"\n"
-                                                resp += byVariacao.ofertado+"\n"
-                                                resp += byVariacao.volume+"\n"
-                                                resp += byVariacao.variacao+"\n"
-                                            }
-                                            console.log(resp)
+                                           
                                             bot.reply({
                                                 chat_id: chatId,
                                                 text: 'a'
