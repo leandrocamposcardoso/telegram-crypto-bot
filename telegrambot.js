@@ -134,7 +134,7 @@ module.exports = class TelegramBot {
                                     console.log(moeda)
                                     this.getCriptoCourrence(moeda, function (resp) {
                                         resp = JSON.parse(resp.replace(/]|[[]/g, ''))
-                                        var cripto_brl = "Valor: R$" + resp.price_brl.substring(0, resp.price_brl.length - 2);
+                                        var cripto_brl = "Valor: R$" +  parseFloat(resp.price_brl).toFixed(2);
                                         const DEV_CONFIG = process.env.DEVELOPMENT_CONFIG == 'true';
                                         const APP_NAME = "api-telegram-btc";
                                         const APIAI_ACCESS_TOKEN = "b797b87e61fa4846b407af418965a57d";
@@ -182,7 +182,6 @@ module.exports = class TelegramBot {
                                             } else {
                                                 msg += "\n#"+(i+1);
                                             }
-                                            
                                             msg += "\n\u{1F4B2}Moeda " + resp[i].nome.replace('/', ' para ');
                                             msg += "\n\u{2197}Pedido " + resp[i].pedido;
                                             msg += "\n\u{2196}Ofertado " + resp[i].ofertado;
