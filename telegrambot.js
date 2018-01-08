@@ -177,13 +177,13 @@ module.exports = class TelegramBot {
                                         resp = JSON.parse(resp)
                                         msg = "Cryptopia maior variacao\n"
                                         for (var i = 0, length = keys.length; i < length; i++) {
-                                            msg += "\n#"+i+1
-                                            msg += "\n\u{1F4B2}Moeda " + resp[i].nome
-                                            msg += "\n\u{2197}Pedido " + resp[i].pedido
-                                            msg += "\n\u{2196}Ofertado " + resp[i].ofertado
-                                            msg += "\n\u{1F4B0}Volume " + resp[i].volume
+                                            msg += "\n#"+(i+1);
+                                            msg += "\n\u{1F4B2}Moeda " + resp[i].nome;
+                                            msg += "\n\u{2197}Pedido " + resp[i].pedido;
+                                            msg += "\n\u{2196}Ofertado " + resp[i].ofertado;
+                                            msg += "\n\u{1F4B0}Volume " + resp[i].volume.toFixed(8);
                                             msg += "\n\u{1F4B9}Variacao " + resp[i].variacao.toFixed(2) +"%";
-                                            msg += "\n\n"
+                                            msg += "\n\n";
                                         }
                                         console.log(msg)
                                         bot.reply({
@@ -279,7 +279,7 @@ module.exports = class TelegramBot {
                                 parseFloat(
                                     (data[i].AskPrice - 0.00000001)
                                 ) - parseFloat((data[i].BidPrice + 0.00000001))) /
-                            parseFloat((data[i].BidPrice + 0.00000001))) * 100).toFixed(8)
+                            parseFloat((data[i].BidPrice + 0.00000001))) * 100)
                     });
                 }
                 obj_dic = obj_dic.sort(function (a, b) {
