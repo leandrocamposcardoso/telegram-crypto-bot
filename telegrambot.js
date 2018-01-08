@@ -161,9 +161,8 @@ module.exports = class TelegramBot {
                                     request.get('https://www.cryptopia.co.nz/api/GetMarkets/BTC', function (error, response, body) {
                     
                                     if (!error && response.statusCode == 200) {
-                                            console.log(body)
                                             var response = JSON.parse(body);
-                                            let data = response.data
+                                            let data = response.Data
                                             var dic = {}
                                             for (i in data.Label) {
                                                 dic = {
