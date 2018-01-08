@@ -165,7 +165,7 @@ module.exports = class TelegramBot {
                                             let data = response.Data
                                             var obj_dic = {}
                                             for (i in data.Label) {
-                                                obj_dic[i] = {
+                                                obj_dic.append({
                                                     'nome':data.Label,
                                                     'pedido':data.AskPrice,
                                                     'ofertado':data.BidPrice,
@@ -176,9 +176,9 @@ module.exports = class TelegramBot {
                                                             ) - parseFloat((data.BidPrice + 0.00000001).toFixed(8)))
                                                     /parseFloat((data.BidPrice + 0.00000001).toFixed(8))) * 100
                                                 )
-                                                }
+                                                })
                                             }
-                                            console.log(obj_dic[1].nome)
+                                            console.log(obj_dic)
                                             var byVariacao = obj_dic;
                                             byVariacao.sort(function(a,b) {
                                                 return b.variacao - a.variacao;
