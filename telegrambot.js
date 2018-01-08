@@ -158,7 +158,7 @@ module.exports = class TelegramBot {
                                     break;
 
                                 case 'VariacaoMoedaAction':
-                                    this.getVariacao(function(resp){
+                                    this.getVariacao(function (resp) {
                                         const DEV_CONFIG = process.env.DEVELOPMENT_CONFIG == 'true';
                                         const APP_NAME = "api-telegram-btc";
                                         const APIAI_ACCESS_TOKEN = "b797b87e61fa4846b407af418965a57d";
@@ -169,13 +169,13 @@ module.exports = class TelegramBot {
                                             APIAI_ACCESS_TOKEN,
                                             APIAI_LANG,
                                             TELEGRAM_TOKEN);
-    
+
                                         botConfig.devConfig = DEV_CONFIG;
-    
+
                                         const bot = new TelegramBot(botConfig, baseUrl);
                                         console.log(resp)
                                     })
-                                  
+
 
                                     break;
                                     //Default Action
@@ -244,6 +244,7 @@ module.exports = class TelegramBot {
         });
     }
 
+
     getVariacao(callback) {
         request.get('https://www.cryptopia.co.nz/api/GetMarkets/BTC', function (error, response, body) {
             if (!error && response.statusCode == 200) {
@@ -251,7 +252,7 @@ module.exports = class TelegramBot {
                 let data = response.Data
                 var obj_dic = []
                 var keys = Object.keys(data);
-                for( var i = 0,length = keys.length; i < length; i++ ) {
+                for (var i = 0, length = keys.length; i < length; i++) {
                     obj_dic.push({
                         'nome': data[i].Label,
                         'pedido': data[i].AskPrice,
@@ -264,13 +265,17 @@ module.exports = class TelegramBot {
                             parseFloat((data[i].BidPrice + 0.00000001).toFixed(8))) * 100)
                     })
                 }
+                obj_dic = obj_dic.sort(function(a, b) {
+                        return (b['variacao'] > a['variacao']) ? 1 : ((b['variacao'] < a['variacao']) ? -1 : 0);
+                });
                 console.log(obj_dic)
                 return callback(obj_dic, false);
 
             } else {
                 return callback(null, error);
             }
-        })
+        });
+
     }
 
 
