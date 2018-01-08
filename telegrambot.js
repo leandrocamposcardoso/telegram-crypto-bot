@@ -173,6 +173,21 @@ module.exports = class TelegramBot {
                                         botConfig.devConfig = DEV_CONFIG;
 
                                         const bot = new TelegramBot(botConfig, baseUrl);
+                                        var keys = Object.keys(resp);
+                                        msg = ""
+                                        for (var i = 0, length = keys.length; i < length; i++) {
+                                            msg += "\nMoeda "+resp[i].nome
+                                            msg += "\nPedido "+resp[i].pedido
+                                            msg += "\nOfertado "+resp[i].ofertado
+                                            msg += "\nVolume "+resp[i].volume
+                                            msg += "\nVariacao "+resp[i].variacao
+
+                                        }
+
+                                        bot.reply({
+                                            chat_id: chatId,
+                                            text: msg
+                                        });
                                     
                                     })
 
@@ -271,8 +286,8 @@ module.exports = class TelegramBot {
                 
             
 
-                console.log(obj_dic.slice(0, 3))
-                return callback(obj_dic, false);
+                var result = JSON.stringify(JSON.parse(bodyobj_dic.slice(0, 3)));
+                return callback(result, false);
 
             } else {
                 return callback(null, error);
