@@ -250,8 +250,9 @@ module.exports = class TelegramBot {
                 var response = JSON.parse(body);
                 let data = response.Data
                 console.log(data)
-                var obj_dic = {'a':'a'}
-                for (i in data.Label) {
+                var obj_dic = {}
+                var keys = Object.keys(data);
+                for( var i = 0,length = keys.length; i < length; i++ ) {
                     obj_dic.push({
                         'nome': data.Label,
                         'pedido': data.AskPrice,
