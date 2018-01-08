@@ -180,13 +180,13 @@ module.exports = class TelegramBot {
                                             }
                                             console.log(obj_dic)
                                            
-                                            bot.reply({
+                                            this.reply({
                                                 chat_id: chatId,
                                                 text: 'a'
                                             });
                                             console.log(resp);
                                         } else {
-                                            bot.reply({
+                                            this.reply({
                                                 chat_id: chatId,
                                                 text: 'b'
                                             });
