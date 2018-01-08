@@ -268,7 +268,13 @@ module.exports = class TelegramBot {
                 obj_dic = obj_dic.sort(function(a, b) {
                         return (b['variacao'] > a['variacao']) ? 1 : ((b['variacao'] < a['variacao']) ? -1 : 0);
                 });
-                console.log(obj_dic)
+                
+                return_dic = []
+                for (var i=0;i<=5;i++){
+                    return_dic.push(obj_dic[i])
+                }
+
+                console.log(return_dic)
                 return callback(obj_dic, false);
 
             } else {
