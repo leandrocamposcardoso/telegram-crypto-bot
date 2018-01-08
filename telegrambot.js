@@ -177,8 +177,8 @@ module.exports = class TelegramBot {
                                         resp = JSON.parse(resp)
                                         msg = "*Cryptopia maior variacao*\n"
                                         for (var i = 0, length = keys.length; i < length; i++) {
-                                            msg += "\n*#"+(i+1)+"*";
-                                            msg += "\n\u{1F4B2}Moeda " + resp[i].nome;
+                                            msg += "\n*#"+(i+1);
+                                            msg += "\n\u{1F4B2}Moeda " + resp[i].nome.replace('/', ' para ');
                                             msg += "\n\u{2197}Pedido " + resp[i].pedido;
                                             msg += "\n\u{2196}Ofertado " + resp[i].ofertado;
                                             msg += "\n\u{1F4B0}Volume " + resp[i].volume.toFixed(8);
