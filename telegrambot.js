@@ -165,7 +165,7 @@ module.exports = class TelegramBot {
                                             let data = response.Data
                                             var obj_dic = {}
                                             for (i in data.Label) {
-                                                obj_dic = {
+                                                obj_dic[i] = {
                                                     'nome':data.Label,
                                                     'pedido':data.AskPrice,
                                                     'ofertado':data.BidPrice,
