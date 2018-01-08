@@ -182,19 +182,19 @@ module.exports = class TelegramBot {
                                             byVariacao.sort(function(a,b) {
                                                 return b.variacao - a.variacao;
                                             });
-                                            var response = "Maior variacao:\n"
+                                            var resp = "Maior variacao:\n"
                                             for (i=0;i<=5;i++){
-                                                response += byVariacao.nome+"\n"
-                                                response += byVariacao.pedido+"\n"
-                                                response += byVariacao.ofertado+"\n"
-                                                response += byVariacao.volume+"\n"
-                                                response += byVariacao.variacao+"\n"
+                                                resp += byVariacao.nome+"\n"
+                                                resp += byVariacao.pedido+"\n"
+                                                resp += byVariacao.ofertado+"\n"
+                                                resp += byVariacao.volume+"\n"
+                                                resp += byVariacao.variacao+"\n"
                                             }
                                             bot.reply({
                                                 chat_id: chatId,
-                                                text: response
+                                                text: resp
                                             });
-                                            console.log(response);
+                                            console.log(resp);
                                         } else {
                                             bot.reply({
                                                 chat_id: chatId,
