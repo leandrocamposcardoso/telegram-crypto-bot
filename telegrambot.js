@@ -250,10 +250,20 @@ module.exports = class TelegramBot {
                 var response = JSON.parse(body);
                 let data = response.Data
                 console.log(data)
-                var obj_dic = {}
+                var obj_dic = []
                 var keys = Object.keys(data);
                 for( var i = 0,length = keys.length; i < length; i++ ) {
-                   console.log('a')
+                    obj_dic.push({
+                        'nome': data.Label,
+                        'pedido': data.AskPrice,
+                        'ofertado': data.BidPrice,
+                        'volume': data.Volume,
+                        'variacao': (((
+                                parseFloat(
+                                    (data.AskPrice - 0.00000001).toFixed(8)
+                                ) - parseFloat((data.BidPrice + 0.00000001).toFixed(8))) /
+                            parseFloat((data.BidPrice + 0.00000001).toFixed(8))) * 100)
+                    })
                 }
                 return callback(obj_dic, false);
 
