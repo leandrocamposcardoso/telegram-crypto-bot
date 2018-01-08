@@ -196,7 +196,10 @@ module.exports = class TelegramBot {
                                             });
                                             console.log(response);
                                         } else {
-                                            return error;
+                                            bot.reply({
+                                                chat_id: chatId,
+                                                text: error
+                                            });
                                         }
                                     });
                                     break;
