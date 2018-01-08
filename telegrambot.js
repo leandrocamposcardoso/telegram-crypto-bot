@@ -249,6 +249,7 @@ module.exports = class TelegramBot {
             if (!error && response.statusCode == 200) {
                 var response = JSON.parse(body);
                 let data = response.Data
+                console.log(data)
                 var obj_dic = {'a':'a'}
                 for (i in data.Label) {
                     obj_dic.push({
