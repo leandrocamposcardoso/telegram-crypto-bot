@@ -270,7 +270,8 @@ module.exports = class TelegramBot {
                 });
                 
                 var return_dic = []
-                for (var i=0;i<=5;i++){
+                var keys = Object.keys(obj_dic);
+                for (var i = 0, length = 5; i < length; i++) {
                     return_dic.push(obj_dic[i])
                 }
 
