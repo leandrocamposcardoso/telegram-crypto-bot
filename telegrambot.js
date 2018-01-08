@@ -173,7 +173,7 @@ module.exports = class TelegramBot {
                                         botConfig.devConfig = DEV_CONFIG;
 
                                         const bot = new TelegramBot(botConfig, baseUrl);
-                                        console.log(resp)
+                                    
                                     })
 
 
