@@ -163,9 +163,9 @@ module.exports = class TelegramBot {
                                     if (!error && response.statusCode == 200) {
                                             var response = JSON.parse(body);
                                             let data = response.Data
-                                            var dic = {}
+                                            var obj_dic = {}
                                             for (i in data.Label) {
-                                                dic = {
+                                                obj_dic = {
                                                     'nome':data.Label,
                                                     'pedido':data.AskPrice,
                                                     'ofertado':data.BidPrice,
@@ -178,7 +178,7 @@ module.exports = class TelegramBot {
                                                 )
                                                 }
                                             }
-                                            var byVariacao = dic.slice(0);
+                                            var byVariacao = obj_dic;
                                             byVariacao.sort(function(a,b) {
                                                 return b.variacao - a.variacao;
                                             });
