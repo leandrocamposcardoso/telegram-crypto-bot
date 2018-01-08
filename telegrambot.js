@@ -158,7 +158,6 @@ module.exports = class TelegramBot {
                                     break;
 
                                     case 'VariacaoMoedaAction':
-                                    console.log('aaa<<<')
                                     request.get('https://www.cryptopia.co.nz/api/GetMarkets/BTC', function (error, response, body) {
                     
                                     if (!error && response.statusCode == 200) {
