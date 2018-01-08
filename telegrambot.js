@@ -190,6 +190,7 @@ module.exports = class TelegramBot {
                                                 resp += byVariacao.volume+"\n"
                                                 resp += byVariacao.variacao+"\n"
                                             }
+                                            console.log(resp)
                                             bot.reply({
                                                 chat_id: chatId,
                                                 text: 'a'
