@@ -177,7 +177,7 @@ module.exports = class TelegramBot {
                                         resp = JSON.parse(resp)
                                         msg = "Cryptopia maior variacao\n"
                                         for (var i = 0, length = keys.length; i < length; i++) {
-                                            msg += "\n#"+i
+                                            msg += "\n#"+i+1
                                             msg += "\n\u{1F4B2}Moeda " + resp[i].nome
                                             msg += "\n\u{2197}Pedido " + resp[i].pedido
                                             msg += "\n\u{2196}Ofertado " + resp[i].ofertado
@@ -277,9 +277,9 @@ module.exports = class TelegramBot {
                         'volume': data[i].Volume,
                         'variacao': (((
                                 parseFloat(
-                                    (data[i].AskPrice - 0.00000001).toFixed(8)
-                                ) - parseFloat((data[i].BidPrice + 0.00000001).toFixed(8))) /
-                            parseFloat((data[i].BidPrice + 0.00000001).toFixed(8))) * 100)
+                                    (data[i].AskPrice - 0.00000001)
+                                ) - parseFloat((data[i].BidPrice + 0.00000001))) /
+                            parseFloat((data[i].BidPrice + 0.00000001))) * 100)
                     });
                 }
                 obj_dic = obj_dic.sort(function (a, b) {
