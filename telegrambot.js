@@ -135,7 +135,6 @@ module.exports = class TelegramBot {
                                     this.getCriptoCourrence(moeda, function (resp) {
                                         resp = JSON.parse(resp.replace(/]|[[]/g, ''))
                                         var cripto_brl = "Valor: R$" + resp.price_brl.substring(0, resp.price_brl.length - 2);
-                                        console.log(cripto_brl)
                                         const DEV_CONFIG = process.env.DEVELOPMENT_CONFIG == 'true';
                                         const APP_NAME = "api-telegram-btc";
                                         const APIAI_ACCESS_TOKEN = "b797b87e61fa4846b407af418965a57d";
@@ -159,8 +158,9 @@ module.exports = class TelegramBot {
                                     break;
 
                                     case 'VariacaoMoedaAction':
-                                    request.get('https://cors.io/?https://www.cryptopia.co.nz/api/GetMarkets/BTC', function (error, response, body) {
-                                        if (!error && response.statusCode == 200) {
+                                    request.get('https://www.cryptopia.co.nz/api/GetMarkets/BTC', function (error, response, body) {
+                                        console.log('Body'+body)
+                                    if (!error && response.statusCode == 200) {
                                             var response = JSON.parse(body);
                                             let data = response.data
                                             var dic = {}
