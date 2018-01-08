@@ -251,6 +251,7 @@ module.exports = class TelegramBot {
                 let data = response.Data
                 var obj_dic = {}
                 for (i in data.Label) {
+                    console.log('aaa')
                     obj_dic.push({
                         'nome': data.Label,
                         'pedido': data.AskPrice,
