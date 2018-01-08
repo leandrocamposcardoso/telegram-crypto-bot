@@ -244,7 +244,7 @@ module.exports = class TelegramBot {
         });
     }
 
-    getVariacao(val, callback) {
+    getVariacao(callback) {
         request.get('https://www.cryptopia.co.nz/api/GetMarkets/BTC', function (error, response, body) {
             if (!error && response.statusCode == 200) {
                 var response = JSON.parse(body);
