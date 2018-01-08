@@ -178,10 +178,10 @@ module.exports = class TelegramBot {
                                         msg = "Cryptopia\n"
                                         for (var i = 0, length = keys.length; i < length; i++) {
                                             msg += "\n\u{1F4B2}Moeda " + resp[i].nome
-                                            msg += "\nPedido " + resp[i].pedido
-                                            msg += "\nOfertado " + resp[i].ofertado
-                                            msg += "\nVolume " + resp[i].volume
-                                            msg += "\nVariacao " + resp[i].variacao.toFixed(2) +"%"
+                                            msg += "\n\u{2196}Pedido " + resp[i].pedido
+                                            msg += "\n\u{2196}Ofertado " + resp[i].ofertado
+                                            msg += "\n\u{2197}Volume " + resp[i].volume
+                                            msg += "\n\u{1F4B9}Variacao " + resp[i].variacao.toFixed(2) +"%"
                                             msg += "\n\n"
                                         }
                                         console.log(msg)
