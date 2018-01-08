@@ -157,6 +157,49 @@ module.exports = class TelegramBot {
                                         });
                                     })
                                     break;
+
+                                    case 'VariacaoMoedaAction':
+                                    request.get('https://www.cryptopia.co.nz/api/GetMarkets/BTC', function (error, response, body) {
+                                        if (!error && response.statusCode == 200) {
+                                            var response = JSON.parse(response);
+                                            let data = response.data
+                                            var dic = {}
+                                            for (i in data.Label) {
+                                                dic = {
+                                                    'nome':data.Label,
+                                                    'pedido':data.AskPrice,
+                                                    'ofertado':data.BidPrice,
+                                                    'volume':data.Volume,
+                                                    'variacao':(((
+                                                            parseFloat(
+                                                                (data.AskPrice - 0.00000001).toFixed(8)
+                                                            ) - parseFloat((data.BidPrice + 0.00000001).toFixed(8)))
+                                                    /parseFloat((data.BidPrice + 0.00000001).toFixed(8))) * 100
+                                                )
+                                                }
+                                            }
+                                            var byVariacao = dic.slice(0);
+                                            byVariacao.sort(function(a,b) {
+                                                return b.variacao - a.variacao;
+                                            });
+                                            var response = "Maior variacao:\n"
+                                            for (i=0;i<=5;i++){
+                                                response += byVariacao.nome+"\n"
+                                                response += byVariacao.pedido+"\n"
+                                                response += byVariacao.ofertado+"\n"
+                                                response += byVariacao.volume+"\n"
+                                                response += byVariacao.variacao+"\n"
+                                            }
+                                            bot.reply({
+                                                chat_id: chatId,
+                                                text: response
+                                            });
+                                            console.log(response);
+                                        } else {
+                                            return error;
+                                        }
+                                    });
+                                    break;
                                     //Default Action
                                 default:
                                     this.reply({
