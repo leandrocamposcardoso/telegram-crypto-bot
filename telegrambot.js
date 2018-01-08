@@ -265,7 +265,7 @@ module.exports = class TelegramBot {
             if (!error && response.statusCode == 200) {
                 var response = JSON.parse(body);
                 let data = response.Data
-                var obj_dic = []
+                var obj_dic = [];
                 var keys = Object.keys(data);
                 for (var i = 0, length = keys.length; i < length; i++) {
                     obj_dic.push({
@@ -278,7 +278,7 @@ module.exports = class TelegramBot {
                                     (data[i].AskPrice - 0.00000001).toFixed(8)
                                 ) - parseFloat((data[i].BidPrice + 0.00000001).toFixed(8))) /
                             parseFloat((data[i].BidPrice + 0.00000001).toFixed(8))) * 100)
-                    })
+                    });
                 }
                 obj_dic = obj_dic.sort(function(a, b) {
                         return (b['variacao'] > a['variacao']) ? 1 : ((b['variacao'] < a['variacao']) ? -1 : 0);
@@ -286,7 +286,7 @@ module.exports = class TelegramBot {
                 
             
 
-                var result = JSON.stringify(JSON.parse(bodyobj_dic.slice(0, 3)));
+                var result = JSON.stringify(JSON.parse(obj_dic.slice(0, 3)));
                 return callback(result, false);
 
             } else {
