@@ -200,6 +200,7 @@ module.exports = class TelegramBot {
                                                 chat_id: chatId,
                                                 text: error
                                             });
+                                            console.log(error);
                                         }
                                     });
                                     break;
