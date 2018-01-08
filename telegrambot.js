@@ -175,14 +175,14 @@ module.exports = class TelegramBot {
                                         const bot = new TelegramBot(botConfig, baseUrl);
                                         var keys = Object.keys(resp.slice(0, 10));
                                         resp = JSON.parse(resp)
-                                        msg = "Cryptopia maior variacao\n"
+                                        msg = "*Cryptopia maior variacao*\n"
                                         for (var i = 0, length = keys.length; i < length; i++) {
-                                            msg += "\n#"+(i+1);
+                                            msg += "\n*#"+(i+1)+"*";
                                             msg += "\n\u{1F4B2}Moeda " + resp[i].nome;
                                             msg += "\n\u{2197}Pedido " + resp[i].pedido;
                                             msg += "\n\u{2196}Ofertado " + resp[i].ofertado;
                                             msg += "\n\u{1F4B0}Volume " + resp[i].volume.toFixed(8);
-                                            msg += "\n\u{1F4B9}Variacao " + resp[i].variacao.toFixed(2) +"%";
+                                            msg += "\n\u{1F4B9}Variação " + resp[i].variacao.toFixed(2) +"%";
                                             msg += "\n\n";
                                         }
                                         console.log(msg)
