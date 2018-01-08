@@ -249,7 +249,6 @@ module.exports = class TelegramBot {
             if (!error && response.statusCode == 200) {
                 var response = JSON.parse(body);
                 let data = response.Data
-                console.log(data)
                 var obj_dic = []
                 var keys = Object.keys(data);
                 for( var i = 0,length = keys.length; i < length; i++ ) {
@@ -265,6 +264,7 @@ module.exports = class TelegramBot {
                             parseFloat((data.BidPrice + 0.00000001).toFixed(8))) * 100)
                     })
                 }
+                console.log(obj_dic)
                 return callback(obj_dic, false);
 
             } else {
