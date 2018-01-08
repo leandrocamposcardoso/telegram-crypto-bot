@@ -192,13 +192,13 @@ module.exports = class TelegramBot {
                                             }
                                             bot.reply({
                                                 chat_id: chatId,
-                                                text: resp
+                                                text: 'a'
                                             });
                                             console.log(resp);
                                         } else {
                                             bot.reply({
                                                 chat_id: chatId,
-                                                text: error
+                                                text: 'b'
                                             });
                                             console.log(error);
                                         }
