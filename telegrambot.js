@@ -176,11 +176,11 @@ module.exports = class TelegramBot {
                                         var keys = Object.keys(resp);
                                         msg = ""
                                         for (var i = 0, length = keys.length; i < length; i++) {
-                                            msg += "\nMoeda "+resp[i].nome
-                                            msg += "\nPedido "+resp[i].pedido
-                                            msg += "\nOfertado "+resp[i].ofertado
-                                            msg += "\nVolume "+resp[i].volume
-                                            msg += "\nVariacao "+resp[i].variacao
+                                            msg += "\nMoeda " + resp[i].nome
+                                            msg += "\nPedido " + resp[i].pedido
+                                            msg += "\nOfertado " + resp[i].ofertado
+                                            msg += "\nVolume " + resp[i].volume
+                                            msg += "\nVariacao " + resp[i].variacao
 
                                         }
                                         console.log(msg)
@@ -188,7 +188,7 @@ module.exports = class TelegramBot {
                                             chat_id: chatId,
                                             text: msg
                                         });
-                                    
+
                                     })
 
 
@@ -264,7 +264,7 @@ module.exports = class TelegramBot {
         request.get('https://www.cryptopia.co.nz/api/GetMarkets/BTC', function (error, response, body) {
             if (!error && response.statusCode == 200) {
                 var response = JSON.parse(body);
-                let data = response.Data
+                let data = response.Data;
                 var obj_dic = [];
                 var keys = Object.keys(data);
                 for (var i = 0, length = keys.length; i < length; i++) {
@@ -280,13 +280,13 @@ module.exports = class TelegramBot {
                             parseFloat((data[i].BidPrice + 0.00000001).toFixed(8))) * 100)
                     });
                 }
-                obj_dic = obj_dic.sort(function(a, b) {
-                        return (b['variacao'] > a['variacao']) ? 1 : ((b['variacao'] < a['variacao']) ? -1 : 0);
+                obj_dic = obj_dic.sort(function (a, b) {
+                    return (b.variacao > a.variacao) ? 1 : ((b.variacao < a.variacao) ? -1 : 0);
                 });
-                
-            
 
-                var result = JSON.stringify(JSON.parse(obj_dic.slice(0, 3)));
+
+
+                var result = JSON.stringify(obj_dic.slice(0, 3));
                 return callback(result, false);
 
             } else {
@@ -317,4 +317,4 @@ module.exports = class TelegramBot {
 
         return obj != null;
     }
-}
+};
