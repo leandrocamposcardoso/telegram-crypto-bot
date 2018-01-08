@@ -178,7 +178,7 @@ module.exports = class TelegramBot {
                                                 )
                                                 }
                                             }
-                                            console.log(obj_dic[i])
+                                            console.log(obj_dic[1])
                                             var byVariacao = obj_dic;
                                             byVariacao.sort(function(a,b) {
                                                 return b.variacao - a.variacao;
