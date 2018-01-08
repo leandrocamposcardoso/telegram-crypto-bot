@@ -173,10 +173,11 @@ module.exports = class TelegramBot {
                                         botConfig.devConfig = DEV_CONFIG;
 
                                         const bot = new TelegramBot(botConfig, baseUrl);
-                                        var keys = Object.keys(resp.slice(0, 5));
+                                        var keys = Object.keys(resp.slice(0, 10));
                                         resp = JSON.parse(resp)
                                         msg = "Cryptopia maior variacao\n"
                                         for (var i = 0, length = keys.length; i < length; i++) {
+                                            msg += "\n#"+i
                                             msg += "\n\u{1F4B2}Moeda " + resp[i].nome
                                             msg += "\n\u{2197}Pedido " + resp[i].pedido
                                             msg += "\n\u{2196}Ofertado " + resp[i].ofertado
@@ -282,7 +283,7 @@ module.exports = class TelegramBot {
                     });
                 }
                 obj_dic = obj_dic.sort(function (a, b) {
-                    return ((b.variacao > a.variacao) ? 1 : ((b.variacao < a.variacao) ? -1 : 0)||(b.volume > a.volume) ? 1 : ((b.volume < a.volume) ? -1 : 0));
+                    return ((b.variacao > a.variacao) ? 1 : ((b.variacao < a.variacao) ? -1 : 0));
                 });
 
                 var result = JSON.stringify(obj_dic);
