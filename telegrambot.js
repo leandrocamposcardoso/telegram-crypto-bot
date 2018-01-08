@@ -176,12 +176,13 @@ module.exports = class TelegramBot {
                                         var keys = Object.keys(resp);
                                         msg = ""
                                         for (var i = 0, length = keys.length; i < length; i++) {
+                                            msg += i
                                             msg += "\nMoeda " + resp[i].nome
                                             msg += "\nPedido " + resp[i].pedido
                                             msg += "\nOfertado " + resp[i].ofertado
                                             msg += "\nVolume " + resp[i].volume
                                             msg += "\nVariacao " + resp[i].variacao
-
+                                            msg += "\n\n"
                                         }
                                         console.log(msg)
                                         bot.reply({
@@ -283,8 +284,6 @@ module.exports = class TelegramBot {
                 obj_dic = obj_dic.sort(function (a, b) {
                     return (b.variacao > a.variacao) ? 1 : ((b.variacao < a.variacao) ? -1 : 0);
                 });
-
-
 
                 var result = JSON.stringify(obj_dic.slice(0, 3));
                 return callback(result, false);
