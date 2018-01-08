@@ -279,7 +279,7 @@ module.exports = class TelegramBot {
                                 parseFloat(
                                     (data[i].AskPrice - 0.00000001)
                                 ) - parseFloat((data[i].BidPrice + 0.00000001))) /
-                            parseFloat((data[i].BidPrice + 0.00000001))) * 100)
+                            parseFloat((data[i].BidPrice + 0.00000001))) * 100).toFixed(8)
                     });
                 }
                 obj_dic = obj_dic.sort(function (a, b) {
