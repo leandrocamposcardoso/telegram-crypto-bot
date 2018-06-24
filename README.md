@@ -57,3 +57,4 @@ P.S. If you see that something is not working, please, open an [issue](https://g
 
 Created with great passion for bots.
 In case of any bot development propositions, contact me [here](http://lut.rocks).
+# telegram-crypto-bot
